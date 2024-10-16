@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kapper Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Sidebar (linkerkolom) -->
+        <div class="sidebar">
+            <div class="sidebar-section">
+                <h3>Inwerk filmpjes</h3>
+                <select>
+                    <option>Plannen van afspraken procedure</option>
+                    <option>Verven</option>
+                </select>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Mijn voortgang</h3>
+                <select>
+                    <option>Niet bekeken filmpjes</option>
+                </select>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Instellingen</h3>
+                <select>
+                    <option>Profiel</option>
+                </select>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Agendabeheer</h3>
+              
+            </div>
+
+            <div class="sidebar-section">
+               
+            </div>
+        </div>
+
+        <!-- Hoofdcontent (in het midden) -->
+        <div class="main-content">
+            <div class="center-grid">
+                {% for video in videos %}
+                <div class="grid-item">
+                    <h3>{{ video.title }}</h3>
+                    <p>{{ video.description }}</p>
+                    <video width="320" height="240" controls>
+                        <source src="{{ url_for('static', filename='uploads/' ~ video.filename) }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

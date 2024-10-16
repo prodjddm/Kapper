@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Werknemer Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Werknemer Dashboard</h1>
+        <!-- Uitlog knop toegevoegd -->
+        <div class="logout-container">
+            <a href="{{ url_for('logout') }}" class="btn-logout">Uitloggen</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Welkom, {{ current_user.username }}</h2>
+        <div class="sidebar">
+            <div class="sidebar-section">
+                <h3>Inwerk filmpjes</h3>
+                <ul>
+                    <li><a href="{{ url_for('video_overview', category='verfen') }}">Verfen</a></li>
+                    <li><a href="{{ url_for('video_overview', category='knippen') }}">Knippen</a></li>
+                    <li><a href="{{ url_for('video_overview', category='agendabeheer') }}">Agenda beheer</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Mijn voortgang</h3>
+                <ul>
+                    <li><a href="{{ url_for('progress') }}">Bekijk voortgang</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-content">
+            <h3>Selecteer een optie uit het menu.</h3>
+            <p>Hier kun je je voortgang bekijken en inwerk filmpjes bekijken.</p>
+        </div>
+    </div>
+</body>
+</html>

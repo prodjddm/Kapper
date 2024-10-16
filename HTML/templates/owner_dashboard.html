@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eigenaar Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='owner.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Eigenaar Dashboard</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('upload') }}">Video Uploaden</a></li>
+                <li><a href="{{ url_for('logout') }}">Uitloggen</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Welkom, {{ current_user.username }}!</h2>
+        
+        <section>
+            <h3>Video Uploaden</h3>
+            <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+                <label for="title">Titel:</label>
+                <input type="text" name="title" required>
+                
+                <label for="description">Beschrijving:</label>
+                <textarea name="description" required></textarea>
+                
+                <label for="category">Categorie:</label>
+                <input type="text" name="category" required>
+                
+                <label for="file">Bestand:</label>
+                <input type="file" name="file" accept="video/*" required>
+                
+                <input type="submit" value="Upload Video">
+            </form>
+        </section>
+
+        <section>
+            <h3>Geüploade Video's</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Titel</th>
+                        <th>Beschrijving</th>
+                        <th>Categorie</th>
+                        <th>Acties</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for video in videos %}
+                    <tr>
+                        <td>{{ video.title }}</td>
+                        <td>{{ video.description }}</td>
+                        <td>{{ video.category }}</td>
+                        <td><a href="{{ url_for('video', video_id=video.id) }}">Bekijk</a></td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4">Je hebt nog geen video's geüpload.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>
